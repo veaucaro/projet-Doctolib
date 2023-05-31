@@ -1,0 +1,14 @@
+
+body {
+    background-color: white;
+}
+
+.container {
+    margin-top: 80px;
+    background-color: greenyellow;
+    width: 60%;
+}
+
+.jumbotron {
+  background-color:plum;
+}
