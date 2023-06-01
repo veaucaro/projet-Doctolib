@@ -6,7 +6,6 @@ require ('../controller/ControllerPatient.php');
 require ('../controller/ControllerPraticien.php');
 require ('../controller/ControllerSpecialite.php');
 require ('../controller/ControllerRDV.php');
-require ('../controller/ControllerConnexion.php');
 
 // --- récupération de l'action passée dans l'URL
 $query_string = $_SERVER['QUERY_STRING'];
@@ -20,41 +19,36 @@ $action = htmlspecialchars($param["action"]);
 
 // --- Liste des méthodes autorisées
 switch ($action) {
+ case "administrateurReadNombrePraticient":
+ case "infos" : 
+ case "ListePraticiensSpe" :
+  ControllerAdministrateur::$action();
+  break;
 
-  case"DoctolibConnexion";
-    ControllerConnexion::$action();
-    break;
+ case "??" :
+  ControllerPatient::$action();
+  break;
 
-  case "administrateurReadNombrePraticient":
-  case "infos" :
-  case "ListePraticiensSpe" :
-    ControllerAdministrateur::$action();
-    break;
+ case "??" :
+  ControllerPraticien::$action();
+  break;
 
-  case "??" :
-    ControllerPatient::$action();
-    break;
+ case "specialiteReadAll" :
+ case "specialiteReadId" :
+ case "specialiteRead1" :
+ case "specialiteCreate" :
+ case "specialiteCreated" :
+  ControllerSpecialite::$action();
+  break;
 
-  case "??" :
-    ControllerPraticien::$action();
-    break;
+ case "??":
+     ControllerRDV::$action();
+     break;
 
-  case "specialiteReadAll" :
-  case "specialiteReadId" :
-  case "specialiteRead1" :
-  case "specialiteCreate" :
-  case "specialiteCreated" :
-    ControllerSpecialite::$action();
-    break;
-
-  case "??":
-    ControllerRDV::$action();
-    break;
-
-  // Tache par défaut
-  default:
-    $action = "DoctolibAccueil";
-    ControllerAdministrateur::$action();
+ // Tache par défaut
+ default:
+  $action = "DoctolibAccueil";
+  ControllerAdministrateur::$action();
 }
 ?>
 <!-- ----- Fin router -->
