@@ -63,7 +63,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Se connecter</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router.php?action=???">Login</a></li>
+            <li><a class="dropdown-item" href="router.php?action=DoctolibConnexion">Login</a></li>
             <li><a class="dropdown-item" href="router.php?action=???">S'inscrire</a></li>
             <li><a class="dropdown-item" href="router.php?action=???">Déconnexion</a></li>
           </ul>
