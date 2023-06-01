@@ -5,7 +5,7 @@ class ControllerConnexion {
   // page d'acceuil
   public static function DoctolibConnexion() {
     include 'config.php';
-    $vue = $root . '/app/view/viewDoctolibConnexion.php';
+    $vue = $root . '/app/view/connexion/viewDoctolibConnexion.php';
     if (DEBUG)
       echo ("ControllerConnexion : DoctolibConnexion : vue = $vue");
     require ($vue);
