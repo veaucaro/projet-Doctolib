@@ -1,4 +1,3 @@
-
 <!-- ----- début fragmentDoctolibMenuPraticien -->
 
 <nav class="navbar navbar-expand-lg bg-success fixed-top">
@@ -74,4 +73,3 @@
 </nav> 
 
 <!-- ----- fin fragmentDoctolibMenu -->
-

@@ -1,4 +1,3 @@
-
 <!-- ----- debut router -->
 <?php
 require ('../controller/ControllerAdministrateur.php');
