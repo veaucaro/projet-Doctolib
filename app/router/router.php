@@ -20,7 +20,8 @@ $action = htmlspecialchars($param["action"]);
 // --- Liste des méthodes autorisées
 switch ($action) {
 
-  case"DoctolibConnexion";
+  case"DoctolibConnexion":
+  case"DoctolibConnexionDonnées":    
     ControllerConnexion::$action();
     break;
 

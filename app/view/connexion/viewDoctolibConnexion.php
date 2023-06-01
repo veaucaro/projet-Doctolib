@@ -1,18 +1,17 @@
 <!-- ----- début viewDoctolibConnexion -->
 <?php
-$root = $_SERVER["DOCUMENT_ROOT"];
-require ($root . '/projet/app/view/fragment/fragmentDoctolibHeader.html');
+
+require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
 
 <body>
   <div class="container">
-    <?php
-    include $root . '/projet/app/view/fragment/fragmentDoctolibMenu.php';
-    include $root . '/projet/app/view/fragment/fragmentDoctolibJumbotron.html';
-    ?>
-
+      <?php
+      include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
+      include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
+      ?>
+      
     <form role="form" method='post' action=router.php>
-      <a href="../../router/router.php"></a>
       <div class="form-group">
         <input type="hidden" name='action' value='DoctolibConnexion'>
         <style>
@@ -27,12 +26,11 @@ require ($root . '/projet/app/view/fragment/fragmentDoctolibHeader.html');
         </select>
       </div>
       <p/><br/>
-      <button class="btn btn-primary" type="submit">Submit form</button>
+      <button class="btn btn-primary" type="submit">Connexion</button>
     </form>
     <p/>
   </div>
 
-  <?php include $root . '/projet/app/view/fragment/fragmentDoctolibFooter.html'; ?>
-
+  <?php include $root . '/app/view/fragment/fragmentDoctolibFooter.html'; ?>
   <!-- ----- fin viewDoctolibConnexion -->
 
