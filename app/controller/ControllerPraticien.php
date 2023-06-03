@@ -1,7 +1,28 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+require_once '../model/ModelPersonne.php';
+require_once '../model/ModelSpecialite.php';
+require_once '../model/ModelRDV.php';
 
+class ControllerPraticien {
+
+  // page d'acceuil
+  public static function DoctolibAccueil() {
+    include 'config.php';
+    $vue = $root . '/app/view/viewDoctolibAccueil.php';
+    if (DEBUG)
+      echo ("ControllerAdministrateur : DoctolibAccueil : vue = $vue");
+    require ($vue);
+  }
+
+  public static function AjoutDispo() {
+    $results = ModelPersonne::getAjoutDispo();
+// Construction chemin de la vue
+    include 'config.php';
+    $vue = $root . '/app/view/praticien/viewAjoutDispo.php';
+    if (DEBUG)
+      echo ("ControllerPraticien : praticienAjoutDispo : vue = $vue");
+    require ($vue);
+  }
+
+}

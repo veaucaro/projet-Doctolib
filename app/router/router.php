@@ -35,7 +35,7 @@ switch ($action) {
     ControllerPatient::$action();
     break;
 
-  case "??" :
+   case "AjoutDispo" :
     ControllerPraticien::$action();
     break;
 
