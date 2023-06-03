@@ -48,6 +48,8 @@ switch ($action) {
     break;
 
   case "dispos":
+  case "??":
+  case "RDVprisPatient":
     ControllerRDV::$action();
     break;
 
