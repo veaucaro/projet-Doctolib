@@ -47,7 +47,7 @@ switch ($action) {
     ControllerSpecialite::$action();
     break;
 
-  case "??":
+  case "dispos":
     ControllerRDV::$action();
     break;
 

@@ -36,7 +36,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Praticien</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="router.php?action=???">Liste de mes disponibilités</a></li>
+            <li><a class="dropdown-item" href="router.php?action=dispos">Liste de mes disponibilités</a></li>
             <li><a class="dropdown-item" href="router.php?action=???">Ajout de nouvelles disponibilités</a></li>
             <li> <hr> </li>
             <li><a class="dropdown-item" href="router.php?action=???">Liste des rendez-vous avec le nom des patients</a></li> 

@@ -1,3 +1,5 @@
+  <!-- ----- début viewNombrePraticien -->
+
 <?php
 require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 ?>
@@ -33,6 +35,6 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
   </div>
   <?php include $root . '/app/view/fragment/fragmentDoctolibFooter.html'; ?>
 
-  <!-- ----- fin viewAll -->
+  <!-- ----- fin viewNombrePraticien -->
 
 

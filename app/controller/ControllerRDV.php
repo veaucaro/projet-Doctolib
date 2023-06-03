@@ -1,7 +1,23 @@
+<!-- ----- debut ControllerRDV -->
 <?php
+require_once '../model/ModelRDV.php';
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+class ControllerRDV {
+  public static function dispos(){
+      $praticien_id = 50;
+      $results = ModelRDV::getDisposPra($praticien_id);
+      
+      // Construction chemin de la vue
+    include 'config.php';
+    $vue = $root . '/app/view/praticien/viewDispos.php';
+    if (DEBUG)
+      echo ("ControllerRDV : viewDispos : vue = $vue");
+    require ($vue);
+      
+  }
+    
+}
+?>
+<!-- ----- fin ControllerRDV -->
+
 

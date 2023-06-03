@@ -78,6 +78,24 @@ class ModelRDV {
         }
     }
     
+          // Liste des dispos du praticien connecté
+    public static function getDisposPra($praticien_id){
+       try {
+            $database = Model::getInstance();
+            $query = "select rdv_date from rendezvous WHERE patient_id = 0 AND praticien_id = :praticien_id";
+            $statement = $database->prepare($query);
+            $statement->execute([
+          'praticien_id' => $praticien_id
+      ]);
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
+    
 }
 ?>
 <!-- ----- fin ModelRDV -->
