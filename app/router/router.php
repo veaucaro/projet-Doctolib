@@ -32,6 +32,7 @@ switch ($action) {
     break;
 
   case "listePatientsPra" :
+  case "compte":
     ControllerPatient::$action();
     break;
 

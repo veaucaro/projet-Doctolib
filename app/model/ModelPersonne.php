@@ -230,6 +230,25 @@ class ModelPersonne {
             return NULL;
         }
     }
+    
+    
+    // Informations du patient connecté
+        public static function getCompte($patient_id){
+      try {
+            $database = Model::getInstance();
+            $query = "select * from personne WHERE id = :id";
+            $statement = $database->prepare($query);
+            $statement->execute([
+          'id' => $patient_id
+      ]);
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+    
 
 }
 

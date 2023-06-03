@@ -17,5 +17,17 @@ class ControllerPatient {
       echo ("ControllerPatient : viewRDVprisPatient : vue = $vue");
     require ($vue);
   }
+  
+  public static function compte(){
+      $patient_id = 201;
+      $results = ModelPersonne::getCompte($patient_id);
+      
+      // Construction chemin de la vue
+    include 'config.php';
+    $vue = $root . '/app/view/patient/viewCompte.php';
+    if (DEBUG)
+      echo ("ControllerPatient : viewCompte : vue = $vue");
+    require ($vue);
+  }
 
 }
