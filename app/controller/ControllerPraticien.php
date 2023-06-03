@@ -15,14 +15,21 @@ class ControllerPraticien {
     require ($vue);
   }
 
+
   public static function AjoutDispo() {
-    $results = ModelPersonne::getAjoutDispo();
 // Construction chemin de la vue
     include 'config.php';
     $vue = $root . '/app/view/praticien/viewAjoutDispo.php';
     if (DEBUG)
       echo ("ControllerPraticien : praticienAjoutDispo : vue = $vue");
     require ($vue);
+  }
+
+  public static function AjoutDispoBase() {
+    $rdv_date = $_POST['rdv_date'];
+    $rdv_nombre = $_POST['rdv_nombre'];
+    $praticien_id = 50;
+    $results = ModelPersonne::getAjoutDispoBase($praticien_id);
   }
 
 }
