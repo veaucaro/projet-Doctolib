@@ -178,7 +178,26 @@ class ModelPersonne {
       return NULL;
     }
   }
+ 
+  public static function getAjoutDispoBase() {
+    try {
+      $database = Model::getInstance();
+      $query = "INSERT INTO `rendezvous` VALUES(id, 0 , :praticien_id, :rdv_date)";
+      $statement = $database->prepare($query);
+      $statement->execute([
+          'praticien_id' => $praticien_id,
+          'rdv_date' => $rdv_date,
+          'rdv_nombre' => $rdv_nombre,
+      ]);
+      $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+      return $results;
+    } catch (PDOException $e) {
+      printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+      return NULL;
+    }
+  }
 
+  
   public function utilisateurExiste($login, $password) {
     try {
       // Récupérer les données de la session
