@@ -129,6 +129,93 @@ class ModelRDV {
         }
     }
 
+    //Retourne une liste de praticiens à sélectionner
+    public static function getAllNamesPra() {
+        try {
+            $database = Model::getInstance();
+            $query = "select nom, prenom from personne WHERE statut= 1 ;";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $names = array();
+            foreach ($results as $result) {
+                $names[] = $result['nom'] . ' ' . $result['prenom'];
+            }
+
+            return $names;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    //Retourne une liste de dates en fonction du praticien sélectionné
+
+    public static function getAllRDVPra($names) {
+        try {
+            //mettre sous une forme utilisable les noms du praticien sélectionné à l'étape d'avant
+            $names = explode(' ', $names);
+            $nom = $names[0];
+            $prenom = $names[1];
+
+            $database = Model::getInstance();
+            $query = "select rdv_date from rendezvous r, personne p WHERE r.praticien_id=p.id AND p.nom = :nom AND p.prenom = :prenom AND r.patient_id = 0";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'nom' => $nom,
+                'prenom' => $prenom
+            ]);
+            $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    // Insertion du RDV dans la table en fonction des informations données 
+    public static function getRDV2($names, $RDV, $patient_id) {
+        try {
+            //mettre sous une forme utilisable les noms du praticien sélectionné à l'étape d'avant
+            $names = explode(' ', $names);
+            $nom = $names[0];
+            $prenom = $names[1];
+
+            $database = Model::getInstance();
+
+            // recherche de la valeur de la clé = max(id) + 1
+            $query1 = "select max(id) from rendezvous";
+            $statement1 = $database->query($query1);
+            $tuple = $statement1->fetch();
+            $id = $tuple['0'];
+            $id++;
+
+            // recherche de l'id du praticien souhaité
+            $query = "select id from personne p WHERE p.nom = :nom AND p.prenom = :prenom";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'nom' => $nom,
+                'prenom' => $prenom,
+            ]);
+            $praticien_id = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            // exécution de l'insertion
+            $query = "INSERT INTO rendezvous VALUES ( :id , :patient_id , :praticien_id , :RDV)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'RDV' => $RDV,
+                'id' => $id,
+                'patient_id' => $patient_id,
+                'praticien_id' => $praticien_id
+            ]);
+            return $RDV;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
 }
 ?>
 <!-- ----- fin ModelRDV -->

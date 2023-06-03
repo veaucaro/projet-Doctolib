@@ -102,10 +102,10 @@ class ModelSpecialite {
             return -1;
         }
     }
-    
+
     // liste des spécialités (label)
-    public static function getSpe(){
- try {
+    public static function getSpe() {
+        try {
             $database = Model::getInstance();
             $query = "select label from specialite";
             $statement = $database->prepare($query);

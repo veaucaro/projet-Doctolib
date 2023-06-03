@@ -49,7 +49,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="router.php?action=compte">Mon Compte</a></li>
             <li><a class="dropdown-item" href="router.php?action=mesRDV">Liste de mes rendez-vous</a></li>
-            <li><a class="dropdown-item" href="router.php?action=???">Prendre RDV avec un praticien</a></li> 
+            <li><a class="dropdown-item" href="router.php?action=prendreRDV">Prendre RDV avec un praticien</a></li> 
           </ul>
         </li>
 

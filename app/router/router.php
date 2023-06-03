@@ -52,6 +52,9 @@ switch ($action) {
   case "??":
   case "RDVprisPatient":
   case "mesRDV":
+  case "prendreRDV":
+  case "prendreRDV1":
+  case "prendreRDV2":
     ControllerRDV::$action();
     break;
 

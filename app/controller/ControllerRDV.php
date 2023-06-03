@@ -40,6 +40,40 @@ class ControllerRDV {
         require ($vue);
     }
 
+    // Affiche un formulaire pour sélectionner un praticien qui existe
+    public static function prendreRDV() {
+        $results = ModelRDV::getAllNamesPra();
+
+        // Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/RDV/viewPrendreRDV.php';
+        require ($vue);
+    }
+
+    //garde les informations saisies dans formulaire de la fonction prendreRDV() et propose un autre formulaire avec les disponibilités du praticien sélectionné
+    public static function prendreRDV1() {
+        $names = $_GET['praticien'];
+        $results = ModelRDV::getAllRDVPra($names);
+
+        // Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/RDV/viewPrendreRDV2.php';
+        require ($vue);
+    }
+
+    //analyse des informations données
+    public static function prendreRDV2() {
+        $patient_id = 201;
+        $RDV = $_GET['RDV'];
+        $names = $_GET['praticien'];
+        $results = ModelRDV::getRDV2($names, $RDV, $patient_id);
+
+        // Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/RDV/viewPrendreRDV3.php';
+        require ($vue);
+    }
+
 }
 ?>
 <!-- ----- fin ControllerRDV -->
