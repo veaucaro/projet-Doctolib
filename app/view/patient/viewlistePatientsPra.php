@@ -13,19 +13,20 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 
         // $results contient un tableau avec la liste des clés.
         ?>
-       <style>
+     
+               <style>
           .red-title {
             color: red;
           }
         </style>
-        <h2 class="red-title">Liste de mes rendez-vous </h2> 
+        <h2 class="red-title">Liste de mes patients </h2> 
         
         <table class = "table table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope = "col">Nom</th>
                     <th scope = "col">Prénom</th>
-                    <th scope = "col">Date des rendez-vous disponibles</th>
+                    <th scope = "col">Adresse</th>
                 </tr>
             </thead>
             <tbody>          
@@ -35,7 +36,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
                             . "<td>%s</td>"
                             . "<td>%s</td>"
                             . "<td>%s</td>"
-                            . "</tr>", $element['nom'], $element['prenom'], $element['rdv_date']);
+                            . "</tr>", $element['nom'], $element['prenom'], $element['adresse']);
                 }
                 ?>
             </tbody>

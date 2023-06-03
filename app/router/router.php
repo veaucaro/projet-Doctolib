@@ -31,7 +31,7 @@ switch ($action) {
     ControllerAdministrateur::$action();
     break;
 
-  case "??" :
+  case "listePatientsPra" :
     ControllerPatient::$action();
     break;
 

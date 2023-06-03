@@ -212,6 +212,24 @@ class ModelPersonne {
       return NULL;
     }
   }
+  
+  
+            // Liste de mes patients sans doublons
+    public static function getlistePatients($praticien_id){
+      try {
+            $database = Model::getInstance();
+            $query = "select distinct p.nom, p.prenom, p.adresse from rendezvous r, personne p WHERE r.patient_id=p.id AND r.patient_id != 0 AND r.praticien_id = :praticien_id";
+            $statement = $database->prepare($query);
+            $statement->execute([
+          'praticien_id' => $praticien_id
+      ]);
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
 }
 
