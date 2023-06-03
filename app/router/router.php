@@ -36,9 +36,11 @@ switch ($action) {
     ControllerPatient::$action();
     break;
 
-   case "AjoutDispo" :
+  case "AjoutDispo" :
+  case "AjoutDispoBase" :
     ControllerPraticien::$action();
     break;
+
 
   case "specialiteReadAll" :
   case "specialiteReadId" :
