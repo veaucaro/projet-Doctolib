@@ -13,7 +13,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
       
     <form role="form" method='post' action=router.php>
       <div class="form-group">
-        <input type="hidden" name='action' value='DoctolibConnexion'>
+        <input type="hidden" name='action' value='DoctolibConnexionDonnées'>
         <style>
           .red-title {
             color: red;

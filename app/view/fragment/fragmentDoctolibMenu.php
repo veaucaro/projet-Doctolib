@@ -10,6 +10,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+  
+          
 
         <!-- Attention, il faudra ici afficher praticien/patient/administrateur en fonction du statut de l'utilisateur connecté ;
         par facilité pour l'instant, j'ajoute juste les différentes catégories à la navbar -->

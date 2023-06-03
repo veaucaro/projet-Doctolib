@@ -16,11 +16,20 @@ class ControllerConnexion {
     $login = $_POST['login'];
     $password = $_POST['password'];
 
-    session_start();
-
 // Stocker la valeur dans la session
     $_SESSION['login'] = $login;
     $_SESSION['password'] = $password;
+    
+    // peut-être que results devrait contenir les données de sessions à afficher dans le menu?
+        $results = ModelPersonne::utilisateurExiste($login, $password);
+
+        // Construction chemin de l'arrivée (souvent la vue mais ici, la page d'accueil?)
+        include 'config.php';
+        $vue = $root . '/app/view/viewDoctolibAccueil.php';
+        require ($vue);
+    
+    
+    
   }
 
 }

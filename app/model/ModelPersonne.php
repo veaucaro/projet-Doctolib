@@ -186,17 +186,18 @@ class ModelPersonne {
       $password = $_SESSION['password'];
 
       $database = Model::getInstance();
-      $query = "SELECT * FROM utilisateurs WHERE login = :login AND password = :password";
+      $query = "SELECT * FROM personne WHERE login = :login AND password = :password";
       $statement = $database->prepare($query);
       $statement->execute([
           'login' => $login,
           'password' => $password
       ]);
-
-      $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
-
+      
       if ($statement->rowCount() > 0) {
         // Les informations d'identification sont valides puisques renvoie un résultat
+       $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+       
+       // récupérer les noms et prénoms dans des sessions pour pouvoir les mettre dans le menu
 
         exit;
       } else {
