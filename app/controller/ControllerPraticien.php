@@ -29,7 +29,7 @@ class ControllerPraticien {
     $rdv_date = $_POST['rdv_date'];
     $rdv_nombre = $_POST['rdv_nombre'];
     $praticien_id = 50;
-    $results = ModelPersonne::getAjoutDispoBase($praticien_id, $rdv_date);
+    $results = ModelPersonne::getAjoutDispoBase($praticien_id, $rdv_date, $rdv_nombre);
   }
 
 }
