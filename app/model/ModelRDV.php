@@ -150,14 +150,25 @@ class ModelRDV {
         }
     }
 
-    //Retourne une liste de dates en fonction du praticien sélectionné
+    // Retourne les noms et prénoms du praticien sélectionné
+    public static function getNomPrenom($names) {
+        $names = explode(' ', $names);
+        $nom = $names[0];
+        $prenom = $names[1];
+        
+        $praticien = array('nom' => $nom,
+            'prenom' => $prenom);
 
+        return $praticien;
+    }
+
+    //Retourne une liste de dates en fonction du praticien sélectionné
     public static function getAllRDVPra($names) {
         try {
             //mettre sous une forme utilisable les noms du praticien sélectionné à l'étape d'avant
-            $names = explode(' ', $names);
-            $nom = $names[0];
-            $prenom = $names[1];
+            $nomPrenom = self::getNomPrenom($names);
+            $nom = $nomPrenom['nom'];
+            $prenom = $nomPrenom['prenom'];
 
             $database = Model::getInstance();
             $query = "select rdv_date from rendezvous r, personne p WHERE r.praticien_id=p.id AND p.nom = :nom AND p.prenom = :prenom AND r.patient_id = 0";
@@ -175,13 +186,8 @@ class ModelRDV {
     }
 
     // Insertion du RDV dans la table en fonction des informations données 
-    public static function getRDV2($names, $RDV, $patient_id) {
+    public static function getRDV2($nom, $prenom, $RDV, $patient_id) {
         try {
-            //mettre sous une forme utilisable les noms du praticien sélectionné à l'étape d'avant
-            $names = explode(' ', $names);
-            $nom = $names[0];
-            $prenom = $names[1];
-
             $database = Model::getInstance();
 
             // recherche de l'id du praticien souhaité

@@ -53,6 +53,8 @@ class ControllerRDV {
     //garde les informations saisies dans formulaire de la fonction prendreRDV() et propose un autre formulaire avec les disponibilités du praticien sélectionné
     public static function prendreRDV1() {
         $names = $_GET['praticien'];
+     
+        $praticien = ModelRDV::getNomPrenom($names);
         $results = ModelRDV::getAllRDVPra($names);
 
         // Construction chemin de la vue
@@ -65,8 +67,9 @@ class ControllerRDV {
     public static function prendreRDV2() {
         $patient_id = 201;
         $RDV = $_GET['RDV'];
-        $names = $_GET['praticien'];
-        $results = ModelRDV::getRDV2($names, $RDV, $patient_id);
+        $nom = $_GET['nom'];
+        $prenom = $_GET['prenom'];
+        $RDV = ModelRDV::getRDV2($nom, $prenom, $RDV, $patient_id);
 
         // Construction chemin de la vue
         include 'config.php';
