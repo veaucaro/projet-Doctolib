@@ -184,28 +184,21 @@ class ModelRDV {
 
             $database = Model::getInstance();
 
-            // recherche de la valeur de la clé = max(id) + 1
-            $query1 = "select max(id) from rendezvous";
-            $statement1 = $database->query($query1);
-            $tuple = $statement1->fetch();
-            $id = $tuple['0'];
-            $id++;
-
             // recherche de l'id du praticien souhaité
-            $query = "select id from personne p WHERE p.nom = :nom AND p.prenom = :prenom";
-            $statement = $database->prepare($query);
-            $statement->execute([
+            $query1 = "select id from personne p WHERE p.nom = :nom AND p.prenom = :prenom";
+            $statement1 = $database->prepare($query1);
+            $statement1->execute([
                 'nom' => $nom,
                 'prenom' => $prenom,
             ]);
-            $praticien_id = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $tuple = $statement1->fetch();
+            $praticien_id = $tuple['0'];
 
-            // exécution de l'insertion
-            $query = "INSERT INTO rendezvous VALUES ( :id , :patient_id , :praticien_id , :RDV)";
+            // exécution de la mise à jour pour inscrire le RDV au nom du patient
+            $query = "UPDATE rendezvous set patient_id = :patient_id WHERE praticien_id = :praticien_id AND rdv_date = :RDV ; ";
             $statement = $database->prepare($query);
             $statement->execute([
                 'RDV' => $RDV,
-                'id' => $id,
                 'patient_id' => $patient_id,
                 'praticien_id' => $praticien_id
             ]);
