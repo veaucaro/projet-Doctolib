@@ -179,16 +179,21 @@ class ModelPersonne {
     }
   }
  
-  public static function getAjoutDispoBase() {
+   public static function getAjoutDispoBase() {
     try {
       $database = Model::getInstance();
       $query = "INSERT INTO `rendezvous` VALUES(id, 0 , :praticien_id, :rdv_date)";
       $statement = $database->prepare($query);
-      $statement->execute([
-          'praticien_id' => $praticien_id,
-          'rdv_date' => $rdv_date,
-          'rdv_nombre' => $rdv_nombre,
-      ]);
+// Boucle pour insérer les rendez-vous
+      for ($i = 0; $i < $rdv_nombre; $i++) {
+        $statement->execute(array(
+            'praticien_id' => $praticien_id,
+            'rdv_date' => date('Y-m-d H:i:s', $rdv_date),
+            'rdv_nombre' => $i + 1
+        ));
+        // Incrémentation de l'heure pour le prochain rendez-vous
+        $rdv_date = strtotime('+1 hour', $rdv_date);
+      }
       $results = $statement->fetchAll(PDO::FETCH_ASSOC);
       return $results;
     } catch (PDOException $e) {
