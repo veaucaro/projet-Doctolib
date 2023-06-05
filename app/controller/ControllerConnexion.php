@@ -13,15 +13,17 @@ class ControllerConnexion {
 
   public function DoctolibConnexionDonnées() {
     // Récupérer les données du formulaire
-    $login = $_POST['login'];
-    $password = $_POST['password'];
-
-// Stocker la valeur dans la session
-    $_SESSION['login'] = $login;
-    $_SESSION['password'] = $password;
+    $_SESSION['login'] = $_POST['login'];
+    $_SESSION['password'] = $_POST['password'];
+    
+    $login = $_SESSION['login'];
+    $password = $_SESSION['password'];
     
     // peut-être que results devrait contenir les données de sessions à afficher dans le menu?
         $results = ModelPersonne::utilisateurExiste($login, $password);
+        
+        $_SESSION['nom'] = $results['nom'];
+        $_SESSION['prenom'] = $results['prenom'];
 
         // Construction chemin de l'arrivée (souvent la vue mais ici, la page d'accueil?)
         include 'config.php';
