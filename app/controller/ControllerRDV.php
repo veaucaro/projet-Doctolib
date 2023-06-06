@@ -53,7 +53,7 @@ class ControllerRDV {
     //garde les informations saisies dans formulaire de la fonction prendreRDV() et propose un autre formulaire avec les disponibilités du praticien sélectionné
     public static function prendreRDV1() {
         $names = $_GET['praticien'];
-     
+
         $praticien = ModelRDV::getNomPrenom($names);
         $results = ModelRDV::getAllRDVPra($names);
 
@@ -74,6 +74,35 @@ class ControllerRDV {
         // Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/RDV/viewPrendreRDV3.php';
+        require ($vue);
+    }
+
+    // Supprimer un RDV (supprimer une disponibilité pour un praticien)
+    public static function SupprRDV() {
+        $praticien_id = 50;
+        $results = ModelRDV::getDispos($praticien_id);
+
+        // Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/RDV/viewSupprRDV.php';
+        if (DEBUG)
+            echo ("ControllerRDV : viewSupprRDV : vue = $vue");
+        require ($vue);
+    }
+
+    // Analyse du formulaire pour supprimer une dispo
+    public static function dispoSuppr() {
+        $praticien_id = 50;
+        $dispo = $_GET['dispo'];
+        $suppr = ModelRDV::getdispoSuppr($praticien_id, $dispo);
+        
+        $results = ModelRDV::getDisposPra($praticien_id);
+
+        // Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/RDV/viewDispos.php';
+        if (DEBUG)
+            echo ("ControllerRDV : viewDispos : vue = $vue");
         require ($vue);
     }
 

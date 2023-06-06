@@ -28,9 +28,9 @@ class ControllerPraticien {
         $rdv_date = $_GET['rdv_date'];
         $rdv_nombre = $_GET['rdv_nombre'];
         $praticien_id = 50;
-        
+
         $lines = ModelPersonne::getAjoutDispoBase($praticien_id, $rdv_date, $rdv_nombre);
-        
+
         $results = ModelRDV::getDisposPra($praticien_id);
 
         // Construction chemin de la vue
@@ -39,7 +39,6 @@ class ControllerPraticien {
         if (DEBUG)
             echo ("ControllerRDV : viewDispos : vue = $vue");
         require ($vue);
-
     }
 
 }

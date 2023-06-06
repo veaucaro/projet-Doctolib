@@ -27,14 +27,14 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['st
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<?php if ($statut == 'ModelPersonne::ADMINISTRATEUR' || $statut == 'ModelPersonne::PATIENT' || $statut == 'ModelPersonne::PRATICIEN') : ?>
+                        <?php if ($statut == 'ModelPersonne::ADMINISTRATEUR' || $statut == 'ModelPersonne::PATIENT' || $statut == 'ModelPersonne::PRATICIEN') : ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <?php echo '<hr>' .$nom . '<hr>' . $prenom . '<hr>'; ?>
+                                    <?php echo '<hr>' . $nom . '<hr>' . $prenom . '<hr>'; ?>
                                 </a>
-                  
+
                             </li>
-<?php endif; ?>
+                        <?php endif; ?>
 
 
 
@@ -80,7 +80,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['st
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="router.php?action=???">???</a></li>
+                                <li><a class="dropdown-item" href="router.php?action=SupprRDV">Supprimer une disponibilité</a></li>
                                 <li><a class="dropdown-item" href="router.php?action=???">???</a></li>
 
                             </ul>
@@ -90,7 +90,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['st
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Se connecter</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="router.php?action=DoctolibConnexion">Login</a></li>
-                                <li><a class="dropdown-item" href="router.php?action=???">S'inscrire</a></li>
+                                <li><a class="dropdown-item" href="router.php?action=DoctolibInscription">S'inscrire</a></li>
                                 <li><a class="dropdown-item" href="router.php?action=???">Déconnexion</a></li>
                             </ul>
                         </li>

@@ -20,50 +20,52 @@ $action = htmlspecialchars($param["action"]);
 // --- Liste des méthodes autorisées
 switch ($action) {
 
-  case"DoctolibConnexion":
-  case"DoctolibConnexionDonnées":    
-    ControllerConnexion::$action();
-    break;
+    case "DoctolibConnexion":
+    case "DoctolibConnexionDonnées":
+    case "DoctolibInscription":
+    case "InscriptionRead":
+        ControllerConnexion::$action();
+        break;
 
-  case "administrateurReadNombrePraticient":
-  case "infos" :
-  case "ListePraticiensSpe" :
-    ControllerAdministrateur::$action();
-    break;
+    case "administrateurReadNombrePraticient":
+    case "infos" :
+    case "ListePraticiensSpe" :
+        ControllerAdministrateur::$action();
+        break;
 
-  case "listePatientsPra" :
-  case "compte":
-    ControllerPatient::$action();
-    break;
+    case "listePatientsPra" :
+    case "compte":
+        ControllerPatient::$action();
+        break;
 
-  case "AjoutDispo" :
-  case "AjoutDispoBase" :
-    ControllerPraticien::$action();
-    break;
+    case "AjoutDispo" :
+    case "AjoutDispoBase" :
+        ControllerPraticien::$action();
+        break;
 
+    case "specialiteReadAll" :
+    case "specialiteReadId" :
+    case "specialiteRead1" :
+    case "specialiteCreate" :
+    case "specialiteCreated" :
+        ControllerSpecialite::$action();
+        break;
 
-  case "specialiteReadAll" :
-  case "specialiteReadId" :
-  case "specialiteRead1" :
-  case "specialiteCreate" :
-  case "specialiteCreated" :
-    ControllerSpecialite::$action();
-    break;
+    case "dispos":
+    case "SupprRDV":
+    case "dispoSuppr" :
+    case "RDVprisPatient":
+    case "mesRDV":
+    case "prendreRDV":
+    case "prendreRDV1":
+    case "prendreRDV2":
+        ControllerRDV::$action();
+        break;
 
-  case "dispos":
-  case "??":
-  case "RDVprisPatient":
-  case "mesRDV":
-  case "prendreRDV":
-  case "prendreRDV1":
-  case "prendreRDV2":
-    ControllerRDV::$action();
-    break;
-
-  // Tache par défaut
-  default:
-    $action = "DoctolibAccueil";
-    ControllerAdministrateur::$action();
+    // Tache par défaut
+    default:
+        $action = "DoctolibAccueil";
+        ControllerAdministrateur::$action();
 }
 ?>
 <!-- ----- Fin router -->

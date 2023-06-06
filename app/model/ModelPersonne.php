@@ -183,7 +183,7 @@ class ModelPersonne {
         try {
             $database = Model::getInstance();
 
-            $h = 8;
+            $h = 10;
 
             // recherche de la valeur de la clé = max(id) + 1
             $query1 = "SELECT MAX(id) FROM rendezvous";
@@ -287,6 +287,7 @@ class ModelPersonne {
             return NULL;
         }
     }
+
 
 }
 

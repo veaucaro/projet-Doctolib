@@ -45,15 +45,16 @@ class ControllerSpecialite {
     }
 
     // Affiche un formulaire pour récupérer les informations d'une spécialité nouvellement créée
- public static function specialiteCreated() {
-  // ajouter une validation des informations du formulaire
-  $results = ModelSpecialite::insert(
-      htmlspecialchars($_GET['label']));
-  // Construction chemin de la vue
-  include 'config.php';
-  $vue = $root . '/app/view/specialite/viewInserted.php';
-  require ($vue);
- }
+    public static function specialiteCreated() {
+        // ajouter une validation des informations du formulaire
+        $results = ModelSpecialite::insert(
+                        htmlspecialchars($_GET['label']));
+        // Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/specialite/viewInserted.php';
+        require ($vue);
+    }
+
 }
 ?>
 <!-- ----- fin ControllerSpecialite -->

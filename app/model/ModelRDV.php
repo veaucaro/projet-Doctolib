@@ -155,7 +155,7 @@ class ModelRDV {
         $names = explode(' ', $names);
         $nom = $names[0];
         $prenom = $names[1];
-        
+
         $praticien = array('nom' => $nom,
             'prenom' => $prenom);
 
@@ -209,6 +209,43 @@ class ModelRDV {
                 'praticien_id' => $praticien_id
             ]);
             return $RDV;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    public static function getDispos($praticien_id) {
+        try {
+            $database = Model::getInstance();
+            $query = "select * from rendezvous WHERE patient_id = 0 AND praticien_id = :praticien_id";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'praticien_id' => $praticien_id
+            ]);
+            $results = $statement->fetchAll(PDO::FETCH_COLUMN, 3);
+            return $results;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
+
+    public static function getdispoSuppr($praticien_id, $dispo) {
+        try {
+            $database = Model::getInstance();
+
+            $query = "DELETE FROM rendezvous WHERE patient_id = 0 AND praticien_id = :praticien_id AND rdv_date = :rdv_date";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'rdv_date' => $dispo,
+                'praticien_id' => $praticien_id
+            ]);
+
+            // Vérifier si la suppression a réussi
+            $suppr = $statement->rowCount(); // Nombre de lignes supprimées
+
+            return $suppr;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
