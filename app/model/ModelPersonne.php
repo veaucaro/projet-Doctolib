@@ -288,6 +288,39 @@ class ModelPersonne {
         }
     }
 
+   public static function getInscription($nom, $prenom, $adresse, $login, $password, $statut, $spe) {
+    try {
+        $database = Model::getInstance();
+
+        // Recherche de la valeur de la clé = max(id) + 1
+        $query1 = "SELECT MAX(id) as max_id FROM personne";
+        $statement1 = $database->query($query1);
+        $tuple = $statement1->fetch();
+        $id = $tuple['max_id'] + 1;
+
+  
+
+        // Ajout des informations dans la base
+        $query = "INSERT INTO personne (id, nom, prenom, adresse, login, password, statut, specialite_id) VALUES (:id, :nom, :prenom, :adresse, :login, :password, :statut, :spe)";
+        $statement = $database->prepare($query);
+        $statement->execute([
+            'id' => $id,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'adresse' => $adresse,
+            'login' => $login,
+            'password' => $password,
+            'statut' => $statut,
+            'spe' => $spe['id']
+        ]);
+
+        return $id; // Retourne l'ID de la personne inscrite
+    } catch (PDOException $e) {
+        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+        return NULL;
+    }
+}
+
 
 }
 

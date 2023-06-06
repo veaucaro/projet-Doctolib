@@ -27,21 +27,21 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
                 <br>
                 <label for="login">Login :          </label><input type="text" id="login" name="login" required>
                 <br>
-                <label for="password">Password : </label><input type="password" id="password" name="password" required>  
+                <label for="password">Password : </label><input type="password" id="password" name="password" value='secret' required>  
                 <br>
 
                 <label for="statut">Statut : </label> <select class="form-control" id='statut' name='statut' style="width: 200px">
-                    <option>Patient</option>
-                    <option>Praticien</option>
-                    <option>Administrateur</option>
+                    <option value='2'>Patient</option>
+                    <option value='1'>Praticien</option>
+                    <option value='0'>Administrateur</option>
 
                 </select>
                 <br>
 
-                <label for="id">Votre spécialité si vous êtes praticien : </label> <select class="form-control" id='id' name='id' style="width: 200px">
+                <label for="spe">Votre spécialité si vous êtes praticien : </label> <select class="form-control" id='spe' name='spe' style="width: 300px">
                     <?php
-                    foreach ($results as $id) {
-                        echo ("<option>$id</option>");
+                    foreach ($results as $spe) {
+                        echo ("<option>");  echo $spe['label'];  echo (" </option>");
                     }
                     ?>
                 </select>
@@ -49,7 +49,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
 
             </div>
             <p/><br/>
-            <button class="btn btn-primary" type="submit">Connexion</button>
+            <button class="btn btn-primary" type="submit">Inscription</button>
         </form>
         <p/>
     </div>

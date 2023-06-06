@@ -107,11 +107,11 @@ class ModelSpecialite {
     public static function getSpe() {
         try {
             $database = Model::getInstance();
-            $query = "select label from specialite";
+            $query = "SELECT * FROM specialite";
             $statement = $database->prepare($query);
             $statement->execute();
-            $results1 = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-            return $results1;
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
