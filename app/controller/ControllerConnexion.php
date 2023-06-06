@@ -13,27 +13,28 @@ class ControllerConnexion {
 
     public function DoctolibConnexionDonnées() {
         // Récupérer les données du formulaire
-        $_SESSION['login'] = $_POST['login'];
-        $_SESSION['password'] = $_POST['password'];
-
-        $login = $_SESSION['login'];
-        $password = $_SESSION['password'];
+        $login = $_GET['login'];
+        $password = $_GET['password'];
 
         // peut-être que results devrait contenir les données de sessions à afficher dans le menu?
         $results = ModelPersonne::utilisateurExiste($login, $password);
-
-        $_SESSION['nom'] = $results['nom'];
-        $_SESSION['prenom'] = $results['prenom'];
-
-        // Construction chemin de l'arrivée (souvent la vue mais ici, la page d'accueil?)
-        include 'config.php';
-        $vue = $root . '/app/view/viewDoctolibAccueil.php';
-        require ($vue);
-    }
-    
-    public static function DoctolibInscription(){
-        $results = ModelSpecialite::getSpe();
         
+        if ($results == "Identifiants invalides") {
+            // Construction chemin de l'arrivée
+            include 'config.php';
+            $vue = $root . '/app/view/connexion/viewEchec.php';
+            require ($vue);
+        } else {
+            // Construction chemin de l'arrivée
+            include 'config.php';
+            $vue = $root . '/app/view/viewDoctolibAccueil.php';
+            require ($vue);
+        }
+    }
+
+    public static function DoctolibInscription() {
+        $results = ModelSpecialite::getSpe();
+
         // Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/connexion/viewInscription.php';
@@ -42,8 +43,7 @@ class ControllerConnexion {
         require ($vue);
     }
 
-    
-    public static function InscriptionRead(){
+    public static function InscriptionRead() {
         $nom = $_GET['nom'];
         $prenom = $_GET['prenom'];
         $adresse = $_GET['adresse'];
@@ -51,20 +51,28 @@ class ControllerConnexion {
         $password = $_GET['password'];
         $statut = $_GET['statut'];
         $spe = $_GET['spe'];
-        
+
         $results = ModelPersonne::getInscription($nom, $prenom, $adresse, $login, $password, $statut, $spe);
-                // Construction chemin de la vue
+        // Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/viewDoctolibAccueil.php';
         if (DEBUG)
             echo ("ControllerConnexion : viewInscription : vue = $vue");
         require ($vue);
-        
-        
-        
-        
     }
     
+    public static function deconnexion(){
+        $results = ModelPersonne::deconnect();
+        
+        // Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/viewDoctolibAccueil.php';
+        if (DEBUG)
+            echo ("ControllerConnexion :  : vue = $vue");
+        require ($vue);
+    }
+    
+
 }
 
 ?>

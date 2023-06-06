@@ -222,9 +222,6 @@ class ModelPersonne {
 
     public function utilisateurExiste($login, $password) {
         try {
-            // Récupérer les données de la session
-            $login = $_SESSION['login'];
-            $password = $_SESSION['password'];
 
             $database = Model::getInstance();
             $query = "SELECT * FROM personne WHERE login = :login AND password = :password";
@@ -233,21 +230,27 @@ class ModelPersonne {
                 'login' => $login,
                 'password' => $password
             ]);
+            session_start();
 
             if ($statement->rowCount() > 0) {
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
                 // Les informations d'identification sont valides puisques renvoie un résultat
-                $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelPersonne");
+                $_SESSION['login'] = $login;
+                $_SESSION['password'] = $password;
 
-                // récupérer les noms et prénoms dans des sessions pour pouvoir les mettre dans le menu
+                // récupérer les noms, prénoms et statut dans des sessions pour pouvoir les mettre dans le menu et les id pour les fonctions qui les utilisent
+                $_SESSION['nom'] = $results[0]['nom'];
+                $_SESSION['prenom'] = $results[0]['prenom'];
+                $_SESSION['statut'] = $results[0]['statut'];
+                $_SESSION['id'] = $results[0]['id'];
 
-                exit;
+                return $results;
             } else {
                 // Les informations d'identification sont invalides
                 // Affichez un message d'erreur ou effectuez d'autres actions appropriées.
-                echo "Identifiants invalides";
+                $results = "Identifiants invalides";
+                return $results;
             }
-
-            return $results;
         } catch (PDOException $e) {
             printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
             return NULL;
@@ -288,39 +291,45 @@ class ModelPersonne {
         }
     }
 
-   public static function getInscription($nom, $prenom, $adresse, $login, $password, $statut, $spe) {
-    try {
-        $database = Model::getInstance();
+    public static function getInscription($nom, $prenom, $adresse, $login, $password, $statut, $spe) {
+        try {
+            $database = Model::getInstance();
 
-        // Recherche de la valeur de la clé = max(id) + 1
-        $query1 = "SELECT MAX(id) as max_id FROM personne";
-        $statement1 = $database->query($query1);
-        $tuple = $statement1->fetch();
-        $id = $tuple['max_id'] + 1;
+            // Recherche de la valeur de la clé = max(id) + 1
+            $query1 = "SELECT MAX(id) as max_id FROM personne";
+            $statement1 = $database->query($query1);
+            $tuple = $statement1->fetch();
+            $id = $tuple['max_id'] + 1;
 
-  
+            // Ajout des informations dans la base
+            $query = "INSERT INTO personne (id, nom, prenom, adresse, login, password, statut, specialite_id) VALUES (:id, :nom, :prenom, :adresse, :login, :password, :statut, :spe)";
+            $statement = $database->prepare($query);
+            $statement->execute([
+                'id' => $id,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'adresse' => $adresse,
+                'login' => $login,
+                'password' => $password,
+                'statut' => $statut,
+                'spe' => $spe['id']
+            ]);
 
-        // Ajout des informations dans la base
-        $query = "INSERT INTO personne (id, nom, prenom, adresse, login, password, statut, specialite_id) VALUES (:id, :nom, :prenom, :adresse, :login, :password, :statut, :spe)";
-        $statement = $database->prepare($query);
-        $statement->execute([
-            'id' => $id,
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'adresse' => $adresse,
-            'login' => $login,
-            'password' => $password,
-            'statut' => $statut,
-            'spe' => $spe['id']
-        ]);
-
-        return $id; // Retourne l'ID de la personne inscrite
-    } catch (PDOException $e) {
-        printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-        return NULL;
+            return $id; // Retourne l'ID de la personne inscrite
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
     }
-}
 
+    public static function deconnect() {
+        session_reset();
+        session_start();
+        $_SESSION['login'] = "vide";
+        $_SESSION['prenom'] = "vide";
+        $_SESSION['nom'] = "vide";
+        $_SESSION['statut'] = "vide";
+    }
 
 }
 

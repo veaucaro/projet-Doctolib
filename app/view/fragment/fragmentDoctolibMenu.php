@@ -1,13 +1,22 @@
+
 <?php
-// Vérifier si les variables de session existent
-if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['statut'])) {
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if ($_SESSION['statut'] == "vide") {
+    $nom = " ";
+    $prenom = " ";
+    $statut = " ";
+} else {
     $nom = $_SESSION['nom'];
     $prenom = $_SESSION['prenom'];
-    $statut = $_SESSION['statut'];
-} else {
-    $nom = '';
-    $prenom = '';
-    $statut = 3;
+    if ($_SESSION['statut'] == 0) {
+        $statut = 'Administrateur';
+    } else if ($_SESSION['statut'] == 1) {
+        $statut = 'Praticien';
+    } else if ($_SESSION['statut'] == 2) {
+        $statut = 'Patient';
+    }
 }
 ?>
 
@@ -27,36 +36,43 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['st
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <?php if ($statut == 'ModelPersonne::ADMINISTRATEUR' || $statut == 'ModelPersonne::PATIENT' || $statut == 'ModelPersonne::PRATICIEN') : ?>
+
+                        <a class="navbar-brand" href="router.php?action=DoctolibAccueil"> | <?php echo $statut ?> | <?php echo $prenom ?>  <?php echo $nom ?> | </a>
+
+
+
+
+
+                        <?php
+                        if (session_status() == PHP_SESSION_NONE) {
+                            session_start();
+                        }
+                        if ($_SESSION['statut'] == 0 && $_SESSION['statut'] != 'vide') {
+                            echo ' 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php echo '<hr>' . $nom . '<hr>' . $prenom . '<hr>'; ?>
-                                </a>
-
-                            </li>
-                        <?php endif; ?>
-
-
-
-                        <!-- Attention, il faudra ici afficher praticien/patient/administrateur en fonction du statut de l'utilisateur connecté ;
-                        par facilité pour l'instant, j'ajoute juste les différentes catégories à la navbar -->
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrateur</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="router.php?action=specialiteReadAll">Liste des spécialités</a></li>
-                                <li><a class="dropdown-item" href="router.php?action=specialiteReadId">Sélection d'une spécialité par son id</a></li>
-                                <li><a class="dropdown-item" href="router.php?action=specialiteCreate">Insertion d'une nouvelle spécialité</a></li>
-                                <li> <hr> </li>
-                                <li><a class="dropdown-item" href="router.php?action=ListePraticiensSpe">Liste des praticiens avec leur spécialité</a></li> 
-                                <li><a class="dropdown-item" href="router.php?action=administrateurReadNombrePraticient">Nombre de praticiens par patient</a></li>
-                                <li> <hr> </li>
-                                <li><a class="dropdown-item" href="router.php?action=infos">Infos</a></li> 
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrateur</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="router.php?action=specialiteReadAll">Liste des spécialités</a></li>
+                                    <li><a class="dropdown-item" href="router.php?action=specialiteReadId">Sélection d\'une spécialité par son id</a></li>
+                                    <li><a class="dropdown-item" href="router.php?action=specialiteCreate">Insertion d\'une nouvelle spécialité</a></li>
+                                    <li> <hr> </li>
+                                    <li><a class="dropdown-item" href="router.php?action=ListePraticiensSpe">Liste des praticiens avec leur spécialité</a></li> 
+                                    <li><a class="dropdown-item" href="router.php?action=administrateurReadNombrePraticient">Nombre de praticiens par patient</a></li>
+                                    <li> <hr> </li>
+                                    <li><a class="dropdown-item" href="router.php?action=infos">Infos</a></li> 
+                                </ul>
+                            </li> ';
+                        }
+                        ?>
 
 
-                            </ul>
-                        </li>
-
+                        <?php
+                        if (session_status() == PHP_SESSION_NONE) {
+                            session_start();
+                        }
+                        if ($_SESSION['statut'] == 1) {
+                            echo ' 
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Praticien</a>
                             <ul class="dropdown-menu">
@@ -66,7 +82,16 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['st
                                 <li><a class="dropdown-item" href="router.php?action=RDVprisPatient">Liste des rendez-vous avec le nom des patients</a></li> 
                                 <li><a class="dropdown-item" href="router.php?action=listePatientsPra">Liste de mes patients (sans doublon)</a></li>
                             </ul>
-                        </li>
+                        </li>';
+                        }
+                        ?>
+
+                        <?php
+                        if (session_status() == PHP_SESSION_NONE) {
+                            session_start();
+                        }
+                        if ($_SESSION['statut'] == 2) {
+                            echo ' 
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Patient</a>
@@ -75,7 +100,10 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['st
                                 <li><a class="dropdown-item" href="router.php?action=mesRDV">Liste de mes rendez-vous</a></li>
                                 <li><a class="dropdown-item" href="router.php?action=prendreRDV">Prendre RDV avec un praticien</a></li> 
                             </ul>
-                        </li>
+                        </li>';
+                        }
+                        ?>
+
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Innovations</a>
@@ -91,7 +119,7 @@ if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['st
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="router.php?action=DoctolibConnexion">Login</a></li>
                                 <li><a class="dropdown-item" href="router.php?action=DoctolibInscription">S'inscrire</a></li>
-                                <li><a class="dropdown-item" href="router.php?action=???">Déconnexion</a></li>
+                                <li><a class="dropdown-item" href="router.php?action=deconnexion">Déconnexion</a></li>
                             </ul>
                         </li>
                     </ul>

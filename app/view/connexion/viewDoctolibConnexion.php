@@ -11,7 +11,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
       include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
       ?>
       
-    <form role="form" method='post' action=router.php>
+    <form role="form" method='get' action="router.php">
       <div class="form-group">
         <input type="hidden" name='action' value='DoctolibConnexionDonnées'>
         <style>

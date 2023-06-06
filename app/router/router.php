@@ -24,6 +24,7 @@ switch ($action) {
     case "DoctolibConnexionDonnées":
     case "DoctolibInscription":
     case "InscriptionRead":
+    case "deconnexion" :
         ControllerConnexion::$action();
         break;
 
