@@ -14,29 +14,6 @@ class ControllerAdministrateur {
       echo ("ControllerAdministrateur : DoctolibAccueil : vue = $vue");
     require ($vue);
   }
-
-  
-  
-  
-  // PAS UTILISE POUR LE MOMENT
-  public static function administrateurInfo($param) {
-    $_SESSION['controller'] = "ControllerAdministrateur";
-
-    $resultats_specialite = ModelSpecialite::getAll();
-    $resultats_administrateur = ModelPersonne::getAll(ModelPersonne::ADMINISTRATEUR);
-    $resultats_praticien = ModelPersonne::getAll(ModelPersonne::PRATICIEN);
-    $resultats_patient = ModelPersonne::getAll(ModelPersonne::PATIENT);
-    $resultats_RDV = ModelRDV::getAll();
-
-    // contruction chemin de la vue
-    include 'config.php';
-    $vue = $root . '/app/view/administrateur/viewInfo.php';
-    require ($vue);
-  }
-  
-  
-  
-  
   
 
   public static function administrateurReadNombrePraticient() {
@@ -50,7 +27,7 @@ class ControllerAdministrateur {
   }
   
   public static function infos(){
-      $results1 = ModelSpecialite::getSpe(); 
+      $results1 = ModelSpecialite::getSpecial(); 
       $results2 = ModelPersonne::getPra();
       $results3 = ModelPersonne::getPatients();
       $results4 = ModelPersonne::getAdmin();
@@ -77,7 +54,6 @@ class ControllerAdministrateur {
   }
 
 
-  // --- to be continued
 }
 
 ?>

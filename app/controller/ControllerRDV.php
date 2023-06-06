@@ -5,7 +5,10 @@ require_once '../model/ModelRDV.php';
 class ControllerRDV {
 
     public static function dispos() {
-        $praticien_id = 50;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $praticien_id = $_SESSION['id'];
         $results = ModelRDV::getDisposPra($praticien_id);
 
         // Construction chemin de la vue
@@ -17,7 +20,10 @@ class ControllerRDV {
     }
 
     public static function RDVprisPatient() {
-        $praticien_id = 50;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $praticien_id = $_SESSION['id'];
         $results = ModelRDV::getRDVpris($praticien_id);
 
         // Construction chemin de la vue
@@ -29,7 +35,10 @@ class ControllerRDV {
     }
 
     public static function mesRDV() {
-        $patient_id = 201;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $patient_id = $_SESSION['id'];
         $results = ModelRDV::getmesRDV($patient_id);
 
         // Construction chemin de la vue
@@ -65,7 +74,10 @@ class ControllerRDV {
 
     //analyse des informations données
     public static function prendreRDV2() {
-        $patient_id = 201;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $patient_id = $_SESSION['id'];
         $RDV = $_GET['RDV'];
         $nom = $_GET['nom'];
         $prenom = $_GET['prenom'];
@@ -79,7 +91,10 @@ class ControllerRDV {
 
     // Supprimer un RDV (supprimer une disponibilité pour un praticien)
     public static function SupprRDV() {
-        $praticien_id = 50;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $praticien_id = $_SESSION['id'];
         $results = ModelRDV::getDispos($praticien_id);
 
         // Construction chemin de la vue
@@ -92,10 +107,13 @@ class ControllerRDV {
 
     // Analyse du formulaire pour supprimer une dispo
     public static function dispoSuppr() {
-        $praticien_id = 50;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $praticien_id = $_SESSION['id'];
         $dispo = $_GET['dispo'];
         $suppr = ModelRDV::getdispoSuppr($praticien_id, $dispo);
-        
+
         $results = ModelRDV::getDisposPra($praticien_id);
 
         // Construction chemin de la vue

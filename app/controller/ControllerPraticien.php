@@ -27,7 +27,10 @@ class ControllerPraticien {
     public static function AjoutDispoBase() {
         $rdv_date = $_GET['rdv_date'];
         $rdv_nombre = $_GET['rdv_nombre'];
-        $praticien_id = 50;
+          if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+      $praticien_id = $_SESSION['id'];
 
         $lines = ModelPersonne::getAjoutDispoBase($praticien_id, $rdv_date, $rdv_nombre);
 

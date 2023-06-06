@@ -7,7 +7,10 @@ require_once '../model/ModelRDV.php';
 class ControllerPatient {
 
   public static function listePatientsPra() {
-      $praticien_id = 50;
+      if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+      $praticien_id = $_SESSION['id'];
       $results = ModelPersonne::getlistePatients($praticien_id);
       
       // Construction chemin de la vue
@@ -19,7 +22,10 @@ class ControllerPatient {
   }
   
   public static function compte(){
-      $patient_id = 201;
+      if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+      $patient_id = $_SESSION['id'];
       $results = ModelPersonne::getCompte($patient_id);
       
       // Construction chemin de la vue

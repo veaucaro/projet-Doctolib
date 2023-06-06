@@ -11,7 +11,6 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
         include $root . '/app/view/fragment/fragmentDoctolibMenu.php';
         include $root . '/app/view/fragment/fragmentDoctolibJumbotron.html';
 
-        // $results contient un tableau avec la liste des clés.
         ?>
      
                <style>
@@ -19,7 +18,7 @@ require ($root . '/app/view/fragment/fragmentDoctolibHeader.html');
             color: red;
           }
         </style>
-        <h2 class="red-title">Liste de mes patients </h2> 
+        <h2 class="red-title">Mes informations </h2> 
         
         <table class = "table table-striped table-bordered">
             <thead>

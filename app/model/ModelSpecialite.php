@@ -102,6 +102,21 @@ class ModelSpecialite {
             return -1;
         }
     }
+    
+     // liste des spécialités (label)
+    public static function getSpecial() {
+        try {
+            $database = Model::getInstance();
+            $query = "SELECT label FROM specialite";
+            $statement = $database->prepare($query);
+            $statement->execute();
+            $results1 = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+            return $results1;
+        } catch (PDOException $e) {
+            printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+            return NULL;
+        }
+    }
 
     // liste des spécialités (label)
     public static function getSpe() {
